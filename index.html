@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEase | B.Tech Major Project 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap');
+        
+        body { 
+            background-color: #020617; 
+            color: #f8fafc; 
+            font-family: 'Outfit', sans-serif; 
+            overflow-x: hidden;
+        }
+        
+        /* Modern UI Elements */
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .text-gradient { 
+            background: linear-gradient(135deg, #10b981, #3b82f6); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        .code-window {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: #1e293b;
+            padding: 8px 16px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Presentation Timer */
+        #presenter-timer { 
+            background: rgba(2, 6, 23, 0.9); 
+            border: 2px solid #10b981; 
+            backdrop-filter: blur(10px);
+        }
+        .timer-alert { border-color: #ef4444 !important; color: #ef4444; animation: pulse-border 1s infinite; }
+        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+
+        /* Scroll Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body onload="initPresentation()">
+
+    <div id="presenter-timer" class="fixed bottom-6 right-6 px-6 py-3 rounded-2xl flex items-center gap-5 z-50 shadow-2xl transition-all duration-300">
+        <div class="flex flex-col text-right">
+            <span class="text-[9px] uppercase font-bold text-slate-400 tracking-[0.2em]">Presentation Time</span>
+            <span id="time-display" class="text-3xl font-black tracking-tighter">00:00</span>
+        </div>
+        <i class="fas fa-satellite-dish text-xl text-emerald-500 animate-pulse"></i>
+    </div>
+
+    <nav class="fixed w-full z-40 glass-panel border-b-0 px-8 py-4 flex justify-between items-center top-0">
+        <div class="flex items-center gap-4">
+            <div class="bg-white p-1 rounded h-10 w-10 flex items-center justify-center">
+                <img src="images/mujlogo.jpg" alt="MUJ" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-university text-slate-900\'></i>';">
+            </div>
+            <div class="flex flex-col">
+                <span class="text-xl font-black tracking-tight leading-none">Rent<span class="text-emerald-500">Ease</span></span>
+                <span class="text-[8px] text-slate-400 uppercase tracking-widest mt-1">Manipal University Jaipur</span>
+            </div>
+        </div>
+        <div class="hidden md:flex gap-8 text-[10px] uppercase font-bold tracking-widest text-slate-400">
+            <a href="#vision" class="hover:text-emerald-400 transition">Vision</a>
+            <a href="#market" class="hover:text-emerald-400 transition">Market Gap</a>
+            <a href="#architecture" class="hover:text-emerald-400 transition">System Core</a>
+            <a href="#database" class="hover:text-emerald-400 transition">Data Model</a>
+            <a href="#business" class="hover:text-emerald-400 transition">Monetization</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 space-y-40 pb-40 pt-32">
+        
+        <section id="vision" class="min-h-[80vh] flex flex-col justify-center items-center text-center reveal">
+            <div class="border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-8">
+                B.Tech Computer Science & Engineering • 2026
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.9]">
+                REDEFINING THE <br>
+                <span class="text-gradient">RENTAL ECOSYSTEM</span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-3xl font-light leading-relaxed mb-12">
+                A highly scalable, MERN-stack platform dismantling the traditional broker-monopoly through <strong class="text-white">Transparency, Digital Security, and Automated Efficiency.</strong>
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://secure-rent-nest.lovable.app/" target="_blank" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full font-bold uppercase tracking-widest text-xs transition shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center gap-2">
+                    <i class="fas fa-play-circle text-lg"></i> Show Preview
+                </a>
+                <a href="#architecture" class="px-8 py-4 glass-panel hover:bg-white/5 text-white rounded-full font-bold uppercase tracking-widest text-xs transition flex items-center gap-2">
+                    <i class="fas fa-project-diagram"></i> Explore Architecture
+                </a>
+            </div>
+        </section>
+
+        <section id="market" class="grid lg:grid-cols-2 gap-16 items-center reveal">
+            <div class="space-y-8">
+                <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tight border-l-4 border-red-500 pl-6">
+                    The <span class="text-red-500">Trust Deficit</span> <br>in Real Estate
+                </h2>
+                <p class="text-slate-400 text-lg">
+                    The Indian rental market is fragmented. Relying on WhatsApp, cash transactions, and unverified brokers creates extreme liability for both parties.
+                </p>
+                <div class="space-y-4">
+                    <div class="glass-panel p-5 rounded-xl flex items-start gap-4">
+                        <i class="fas fa-hand-holding-usd text-2xl text-red-400 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-white">The Middleman Tax</h4>
+                            <p class="text-sm text-slate-400 mt-1">Tenants pay up to 2 months' rent in non-refundable brokerage fees for zero post-move-in support.</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-xl flex items-start gap-4">
+                        <i class="fas fa-file-contract text-2xl text-red-400 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-white">Legal Vulnerability</h4>
+                            <p class="text-sm text-slate-400 mt-1">Physical agreements bypass the Model Tenancy Act (2021), leading to 22% of security deposits being unfairly withheld.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel p-8 rounded-3xl">
+                <h3 class="text-sm font-bold uppercase text-slate-400 mb-6 tracking-widest text-center">Market Growth vs Digital Adoption</h3>
+                <div class="h-[350px] w-full relative">
+                    <canvas id="marketChart"></canvas>
+                </div>
+                <p class="text-center text-[10px] text-slate-500 mt-4 italic">*Projected growth of unorganized rental sector in Tier 1 & 2 cities.</p>
+            </div>
+        </section>
+
+        <section id="architecture" class="space-y-16 reveal">
+            <div class="text-center">
+                <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tight">System <span class="text-emerald-500">Architecture</span></h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">RentEase employs a robust Model-View-Controller (MVC) paradigm, decoupling the interface from complex geospatial and transactional logic.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-[2rem] border-t-4 border-cyan-400 relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 text-cyan-400/10 group-hover:text-cyan-400/20 transition-all"><i class="fab fa-react text-9xl"></i></div>
+                    <h3 class="text-xl font-bold mb-2 relative z-10">Client Layer</h3>
+                    <p class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-6 relative z-10">React.js & Tailwind</p>
+                    <ul class="text-sm text-slate-400 space-y-3 relative z-10">
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i><strong>Context API</strong> for global state management.</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i><strong>Axios Interceptors</strong> for handling JWT refresh tokens.</li>
+                        <li><i class="fas fa-check text-cyan-400 mr-2"></i><strong>Framer Motion</strong> for fluid UI transitions.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[2rem] border-t-4 border-emerald-400 relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 text-emerald-400/10 group-hover:text-emerald-400/20 transition-all"><i class="fab fa-node-js text-9xl"></i></div>
+                    <h3 class="text-xl font-bold mb-2 relative z-10">Logic Engine</h3>
+                    <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-6 relative z-10">Node.js & Express</p>
+                    <ul class="text-sm text-slate-400 space-y-3 relative z-10">
+                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>Socket.io</strong> for real-time tenant-landlord messaging.</li>
+                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>Multer + Cloudinary</strong> for automated media compression.</li>
+                        <li><i class="fas fa-check text-emerald-400 mr-2"></i><strong>Bcrypt</strong> for cryptographic password hashing.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[2rem] border-t-4 border-green-600 relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 text-green-600/10 group-hover:text-green-600/20 transition-all"><i class="fas fa-database text-9xl"></i></div>
+                    <h3 class="text-xl font-bold mb-2 relative z-10">Data Layer</h3>
+                    <p class="text-[10px] font-bold text-green-500 uppercase tracking-widest mb-6 relative z-10">MongoDB Atlas</p>
+                    <ul class="text-sm text-slate-400 space-y-3 relative z-10">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>NoSQL Flexibility</strong> for variable property amenities.</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Geospatial Indexes</strong> (2dsphere) for proximity mapping.</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Mongoose ORM</strong> enforcing strict data validation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="database" class="grid lg:grid-cols-2 gap-12 reveal">
+            <div class="space-y-8 flex flex-col justify-center">
+                <h2 class="text-4xl font-black uppercase tracking-tight">Deep <span class="text-emerald-500">Data Modeling</span></h2>
+                <p class="text-slate-400">
+                    To maintain data integrity across thousands of transactions, we bridge NoSQL flexibility with relational concepts via <strong>Manual Document Referencing</strong>.
+                </p>
+                
+                <div class="space-y-4 mt-4">
+                    <h4 class="font-bold text-white flex items-center gap-2"><i class="fas fa-map-marker-alt text-emerald-500"></i> Smart Geospatial Searching</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed border-l-2 border-slate-700 pl-4">
+                        Standard databases fail at location queries. By utilizing MongoDB's <code>$geoNear</code> pipeline, RentEase calculates distance metrics in milliseconds, matching tenants with properties specifically within their desired commuting radius.
+                    </p>
+                </div>
+                
+                <div class="space-y-4 mt-2">
+                    <h4 class="font-bold text-white flex items-center gap-2"><i class="fas fa-user-check text-blue-500"></i> Compatibility Algorithm</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed border-l-2 border-slate-700 pl-4">
+                        Our custom matching logic ranks properties not just by price, but by a weighted array factoring in <strong>Tenant Budget Score (40%)</strong>, <strong>Location Proximity (30%)</strong>, and <strong>Landlord Preferences (30%)</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-window shadow-2xl">
+                <div class="code-header">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-[10px] text-slate-400">models/Property.js</span>
+                </div>
+                <div class="p-6 text-slate-300 leading-relaxed whitespace-pre overflow-x-auto">
+<span class="text-purple-400">const</span> mongoose = <span class="text-blue-400">require</span>(<span class="text-green-300">'mongoose'</span>);
+
+<span class="text-purple-400">const</span> PropertySchema = <span class="text-purple-400">new</span> mongoose.Schema({
+  <span class="text-slate-500">// Relational Reference to Landlord</span>
+  owner: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: <span class="text-green-300">'User'</span>,
+    required: <span class="text-orange-400">true</span> 
+  },
+  
+  <span class="text-slate-500">// Geospatial Data Structure</span>
+  location: {
+    type: { type: String, <span class="text-purple-400">enum</span>: [<span class="text-green-300">'Point'</span>], <span class="text-purple-400">default</span>: <span class="text-green-300">'Point'</span> },
+    coordinates: { type: [Number], required: <span class="text-orange-400">true</span> }
+  },
+  
+  financials: {
+    rentAmount: { type: Number, required: <span class="text-orange-400">true</span> },
+    securityDeposit: { type: Number, required: <span class="text-orange-400">true</span> }
+  },
+  
+  verificationStatus: { type: Boolean, <span class="text-purple-400">default</span>: <span class="text-orange-400">false</span> },
+  amenities: [{ type: String }]
+}, { timestamps: <span class="text-orange-400">true</span> });
+
+<span class="text-slate-500">// Creating the 2dsphere index for rapid proximity search</span>
+PropertySchema.index({ location: <span class="text-green-300">"2dsphere"</span> });
+
+<span class="text-blue-400">module.exports</span> = mongoose.model(<span class="text-green-300">'Property'</span>, PropertySchema);
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel p-12 rounded-[3rem] reveal relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 opacity-5 pointer-events-none"><i class="fas fa-shield-alt text-[400px]"></i></div>
+            
+            <div class="text-center mb-16 relative z-10">
+                <h2 class="text-4xl font-black uppercase">The <span class="text-blue-500">Security Ecosystem</span></h2>
+                <p class="text-slate-400 mt-2">Eliminating liability through integrated digital tools.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                <div class="bg-[#020617] p-8 rounded-2xl border border-slate-800 text-center hover:border-blue-500 transition duration-300">
+                    <div class="h-16 w-16 mx-auto bg-blue-500/10 rounded-full flex items-center justify-center text-blue-500 mb-6 text-2xl">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h4 class="font-bold mb-3">Tenant KYC Pipeline</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Integrated identity verification blocks fraudulent applications before they reach landlords, drastically reducing squatter risks.</p>
+                </div>
+                
+                <div class="bg-[#020617] p-8 rounded-2xl border border-slate-800 text-center hover:border-emerald-500 transition duration-300">
+                    <div class="h-16 w-16 mx-auto bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 mb-6 text-2xl">
+                        <i class="fas fa-signature"></i>
+                    </div>
+                    <h4 class="font-bold mb-3">E-Agreements</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">Automated generation of standardized leases compliant with the Model Tenancy Act, featuring AES-256 encryption at rest.</p>
+                </div>
+
+                <div class="bg-[#020617] p-8 rounded-2xl border border-slate-800 text-center hover:border-purple-500 transition duration-300">
+                    <div class="h-16 w-16 mx-auto bg-purple-500/10 rounded-full flex items-center justify-center text-purple-500 mb-6 text-2xl">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4 class="font-bold mb-3">Maintenance Ticketing</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">A dedicated portal replacing chaotic WhatsApp chats. Tenants upload images; landlords assign priority levels and track resolution status.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="business" class="grid lg:grid-cols-2 gap-16 items-center reveal">
+            <div class="order-2 lg:order-1 glass-panel p-10 rounded-[3rem] border-l-8 border-emerald-500">
+                <h3 class="text-2xl font-black mb-8 uppercase tracking-tight">Revenue Streams</h3>
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                        <div>
+                            <p class="font-bold text-white text-lg">Premium Property Boosts</p>
+                            <p class="text-sm text-slate-500">Priority algorithmic ranking for landlords</p>
+                        </div>
+                        <p class="text-emerald-500 font-black text-xl">₹499<span class="text-sm font-normal text-slate-500">/mo</span></p>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                        <div>
+                            <p class="font-bold text-white text-lg">Legal Document Generation</p>
+                            <p class="text-sm text-slate-500">Automated template & stamp duty facilitation</p>
+                        </div>
+                        <p class="text-emerald-500 font-black text-xl">₹299<span class="text-sm font-normal text-slate-500">/doc</span></p>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                        <div>
+                            <p class="font-bold text-white text-lg">Integrated Background Checks</p>
+                            <p class="text-sm text-slate-500">Comprehensive API-driven credit & police checks</p>
+                        </div>
+                        <p class="text-emerald-500 font-black text-xl">₹149<span class="text-sm font-normal text-slate-500">/user</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-1 lg:order-2 space-y-6">
+                <h2 class="text-4xl md:text-5xl font-black uppercase leading-tight">Beyond a Project.<br><span class="text-slate-500">A Viable Startup.</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    RentEase is built to scale. By eliminating the middleman, we don't just solve a tech problem—we solve an economic bottleneck. Capturing just 2% of the student housing market in Jaipur allows for immediate operational break-even.
+                </p>
+                <div class="p-6 bg-emerald-500/10 rounded-2xl border border-emerald-500/30 inline-block mt-4">
+                    <h4 class="font-bold text-emerald-400 uppercase tracking-widest text-xs mb-1">Agile SDLC Status</h4>
+                    <p class="text-sm text-white font-mono">Currently executing Sprint 5/6: Payment Gateway Integration</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="text-center pt-20 border-t border-slate-800 reveal">
+            <h2 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.6em] mb-16">System Architects & Developers</h2>
+            
+            <div class="flex flex-wrap justify-center gap-12 md:gap-24 mb-12">
+                
+                <div class="flex flex-col items-center group">
+                    <div class="h-32 w-32 rounded-full p-1 bg-gradient-to-tr from-emerald-500 to-blue-500 mb-6 group-hover:scale-105 transition duration-300 shadow-2xl">
+                        <div class="h-full w-full bg-slate-900 rounded-full flex items-center justify-center text-3xl">
+                            <i class="fas fa-user-tie text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-black text-white">Mr. Sachin Gupta</h3>
+                    <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mt-2">Faculty Guide / Mentor</p>
+                </div>
+
+                <div class="flex flex-col items-center group">
+                    <div class="h-32 w-32 rounded-full p-1 bg-slate-700 mb-6 group-hover:bg-blue-500 transition duration-300 shadow-xl">
+                        <div class="h-full w-full bg-slate-900 rounded-full flex items-center justify-center text-3xl">
+                            <i class="fas fa-laptop-code text-slate-400 group-hover:text-white transition"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-black text-white">Snedon Cutinha</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-2">Full-Stack Lead</p>
+                    <p class="text-[10px] text-slate-500 mt-1 font-mono">Reg: 2427030490</p>
+                </div>
+
+                <div class="flex flex-col items-center group">
+                    <div class="h-32 w-32 rounded-full p-1 bg-slate-700 mb-6 group-hover:bg-purple-500 transition duration-300 shadow-xl">
+                        <div class="h-full w-full bg-slate-900 rounded-full flex items-center justify-center text-3xl">
+                            <i class="fas fa-server text-slate-400 group-hover:text-white transition"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-black text-white">Krish Vaid</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-2">Backend & Architecture</p>
+                    <p class="text-[10px] text-slate-500 mt-1 font-mono">Dept. of CSE</p>
+                </div>
+            </div>
+            
+            <p class="text-slate-500 max-w-2xl mx-auto italic mb-12">
+                "We built RentEase not just to pass a curriculum, but to engineer a genuine solution to a problem we face as students every day."
+            </p>
+
+            <div class="mt-8">
+                <a href="https://secure-rent-nest.lovable.app/" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white rounded-full font-black uppercase tracking-widest text-sm transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                    Launch Live Prototype <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-10 text-center border-t border-slate-800 bg-[#01040f]">
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.4em]">Manipal University Jaipur • 2026</p>
+    </footer>
+
+    <script>
+        // 1. Chart Configuration (Market Gap)
+        function initChart() {
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            
+            // Gradient for line
+            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.5)');   
+            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
+                    datasets: [
+                        {
+                            label: 'Market Valuation ($ Billions)',
+                            data: [15, 18, 22, 26, 31, 38],
+                            borderColor: '#10b981',
+                            backgroundColor: gradient,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#10b981',
+                            pointRadius: 5,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Digital Solution Penetration (%)',
+                            data: [8, 10, 12, 14, 18, 25],
+                            borderColor: '#3b82f6',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#94a3b8', font: { family: 'Outfit'} } }
+                    },
+                    scales: {
+                        y: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' }, 
+                            ticks: { color: '#64748b', font: {family: 'Outfit'} } 
+                        },
+                        x: { 
+                            grid: { display: false }, 
+                            ticks: { color: '#64748b', font: {family: 'Outfit'} } 
+                        }
+                    },
+                    interaction: { mode: 'index', intersect: false }
+                }
+            });
+        }
+
+        // 2. Presentation Timer Logic (8 Minutes)
+        function initTimer() {
+            let totalSeconds = 0;
+            const timeDisplay = document.getElementById('time-display');
+            const timerContainer = document.getElementById('presenter-timer');
+            
+            const timer = setInterval(() => {
+                totalSeconds++;
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+                
+                timeDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // 6 Minute Warning (360 seconds)
+                if(totalSeconds === 360) {
+                    timerContainer.classList.add('timer-alert');
+                }
+                
+                // 8 Minute Hard Stop (480 seconds)
+                if(totalSeconds >= 480) {
+                    clearInterval(timer);
+                    timeDisplay.innerText = "08:00";
+                    timerContainer.style.backgroundColor = "rgba(239, 68, 68, 0.9)";
+                    timerContainer.style.color = "#fff";
+                }
+            }, 1000);
+        }
+
+        // 3. Scroll Reveal Animations
+        function initScrollAnimations() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+                
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', revealOnScroll);
+            // Trigger once on load
+            revealOnScroll();
+        }
+
+        // Boot system
+        function initPresentation() {
+            initChart();
+            initTimer();
+            initScrollAnimations();
+        }
+    </script>
+</body>
+</html>
